@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">ImdbApp</string>
+
+    <!--    login   -->
+    <string name="usuario">Usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="olvidar">¿Olvidaste la contraseña?</string>
+    <string name="segunda_opcion">Ó podes ingresar con</string>
+    <string name="cuenta_nueva">¿No tenés cuenta?</string>
+    <string name="registro">Regístrate</string>
+    <string name="invitado">Continuar como invitado</string>
+    <string name="login">Login</string>
+
+    <!--    SignUp  -->
+    <string name="sign_up_title">Crear una cuenta</string>
+    <string name="nombre">Nombre</string>
+    <string name="correo">Correo electrónico</string>
+    <string name="verificacion">La contraseña debe contener 8 caracteres</string>
+    <string name="signup">Aceptar</string>
+
+    <!--    Confirm Register    -->
+    <string name="finalizar">Finalizar Registro</string>
+    <string name="connected">Conectado a tu cuenta de </string>
+    <string name="cancelar">Cancelar</string>
+
+    <!--    Profile Page   -->
+    <string name="calificar">Calificar y obtener recomendaciones</string>
+    <string name="agregar_lista">Agregar a listas</string>
+    <string name="criticas">Aún no hay críticas</string>
+    <string name="calificaciones">Calificaciones</string>
+    <string name="listas">Listas</string>
+    <string name="comentarios">Comentarios</string>
+    <string name="lista_seguimiento">Lista de seguimiento</string>
+    <string name="text1">Crea una lista de seguimiento para no perderte ninguna película o serie de tv.</string>
+    <string name="empieza_lista">Empieza tu lista de seguimiento</string>
+    <string name="vistas_recientes">Vistas recientes</string>
+    <string name="text2">No has visitado ninguna página recientemente.</string>
+    <string name="personas_fav">Personas Favoritas</string>
+    <string name="text3">Añadir actores y directores favoritos y más para conocer las últimas novedades.</string>
+    <string name="agg_personas">Agregar personas favoritas</string>
+    <string name="cines">Cines favoritos</string>
+    <string name="estaciones">Estaciones</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="mejorar">Mejorar selecciones principales</string>
+
+    <!--    BottomNav   -->
+    <string name="inicio">Inicio</string>
+    <string name="buscar">Buscar</string>
+    <string name="play">Play</string>
+
+    <!--    Search  -->
+    <string name="search">Buscar IMDb</string>
+
+</resources>
