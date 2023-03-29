@@ -18,7 +18,7 @@ data class MovieDTO(
     @field:Json(name = "overview")
     val overview: String? = "",
     @field:Json(name = "popularity")
-    val popularity: Int? = 0,
+    val popularity: Double? = 0.0,
     @field:Json(name = "poster_path")
     val poster_path: String? = "",
     @field:Json(name = "release_date")
@@ -28,7 +28,7 @@ data class MovieDTO(
     @field:Json(name = "video")
     val video: Boolean? = false,
     @field:Json(name = "vote_average")
-    val vote_average: Int? = 0,
+    val vote_average: Double? = 0.0,
     @field:Json(name = "vote_count")
     val vote_count: Int? = 0
 )

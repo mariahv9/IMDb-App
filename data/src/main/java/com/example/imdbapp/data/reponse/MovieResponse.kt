@@ -1,8 +1,16 @@
-package com.example.imdbapp.domain.model
+package com.example.imdbapp.data.reponse
 
-data class MovieModel(
+data class MovieResponse(
+    val page: Int,
+    val results: List<MovieResulResponse>,
+    val total_pages: Int,
+    val total_results: Int
+)
+
+data class MovieResulResponse(
     val adult: Boolean,
     val backdrop_path: String,
+    val genre_ids: List<Int>,
     val id: Int,
     val original_language: String,
     val original_title: String,

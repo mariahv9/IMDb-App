@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
@@ -21,8 +22,8 @@ import com.example.imdbapp.R
 import com.example.imdbapp.viewmodel.SearchViewModel
 
 @Composable
-fun SearchTextField(state: MutableState<String>) {
-    OutlinedTextField(
+fun SearchTextField(state: MutableState<TextFieldValue>) {
+    TextField(
         modifier = Modifier
             .padding(start = 25.dp, end = 25.dp, top = 10.dp, bottom = 10.dp)
             .fillMaxWidth()

@@ -31,7 +31,20 @@ fun SearchScreen(
     Scaffold(
         bottomBar = { BottomBar(Modifier) }
     ) {
-        Box(
+        Column() {
+            SearchTextField(state = text)
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                state = rememberLazyListState()
+            ) {
+                itemsIndexed(movieViewModel.searchMovie(text.value.text)) { _, movie ->
+                    CardRecyclerSearch(movie = movie)
+                }
+            }
+        }
+
+        /*Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(colorResource(id = R.color.light_gray))
@@ -43,17 +56,9 @@ fun SearchScreen(
                     .padding(bottom = 10.dp)
                     .background(colorResource(id = R.color.white))
             ) {
-                SearchTextField(state = remember { mutableStateOf(text.value.text) })
+
             }
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                state = rememberLazyListState()
-            ) {
-                itemsIndexed(movieViewModel.searchMovie(text.value.text)) { _, movie ->
-                    CardRecyclerSearch(movie = movie)
-                }
-            }
-        }
+
+        }*/
     }
 }

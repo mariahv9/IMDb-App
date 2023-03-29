@@ -21,7 +21,7 @@ class MovieEntity(
     @ColumnInfo(name = "overview")
     val overview: String,
     @ColumnInfo(name = "popularity")
-    val popularity: Int,
+    val popularity: Double,
     @ColumnInfo(name = "poster_path")
     val poster_path: String,
     @ColumnInfo(name = "release_date")
@@ -31,7 +31,7 @@ class MovieEntity(
     @ColumnInfo(name = "video")
     val video: Boolean,
     @ColumnInfo(name = "vote_average")
-    val vote_average: Int,
+    val vote_average: Double,
     @ColumnInfo(name = "vote_count")
     val vote_count: Int
 )
