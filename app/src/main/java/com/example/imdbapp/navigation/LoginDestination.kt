@@ -31,6 +31,6 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onBack: () -> Unit)
     }
 
     composable(route = SearchDestination.route) {
-        SearchScreen(viewModel = hiltViewModel())
+        SearchScreen(movieViewModel = hiltViewModel())
     }
 }

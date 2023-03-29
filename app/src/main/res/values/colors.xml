@@ -9,11 +9,11 @@
 
     <color name="main_color">#F6C700</color>
     <color name="yellow">#F5C518</color>
-    <color name="black_op">#4D000000</color>
     <color name="black">#000000</color>
     <color name="dark_gray">#4B4747</color>
     <color name="light_gray_2">#7C7C7C</color>
     <color name="gray">#9D9C9C</color>
+    <color name="black_op">#4D000000</color>
     <color name="light_gray">#F5F5F5</color>
     <color name="white">#FFFFFF</color>
 
