@@ -2,6 +2,7 @@ package com.example.imdbapp.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,9 +27,9 @@ fun CardRecyclerSearch(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp)
+            .height(IntrinsicSize.Min)
     ) {
-        Row(modifier = Modifier.padding(top = 15.dp, bottom = 15.dp, start = 20.dp)) {
+        Row(modifier = Modifier.padding(top = 15.dp, bottom = 15.dp, start = 10.dp, end = 15.dp)) {
             Image(
                 modifier = Modifier.size(115.dp),
                 painter = rememberAsyncImagePainter(movie.poster_path),
@@ -50,6 +51,7 @@ fun CardRecyclerSearch(
                 Regular(
                     modifier = Modifier.padding(top = 20.dp),
                     color = colorResource(id = R.color.gray),
+                    maxLines = 1,
                     text = movie.overview,
                     textUnit = 16.sp
                 )

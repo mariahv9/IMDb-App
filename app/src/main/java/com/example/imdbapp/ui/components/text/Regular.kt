@@ -14,12 +14,14 @@ fun Regular(
     modifier: Modifier,
     color: Color,
     text: String,
-    textUnit: TextUnit
+    textUnit: TextUnit,
+    maxLines: Int = 3
 ) {
     Text(
         modifier = modifier,
         text = text,
         color = color,
+        maxLines = maxLines,
         fontStyle = FontStyle(R.font.roboto),
         fontWeight = FontWeight.Normal,
         fontSize = textUnit

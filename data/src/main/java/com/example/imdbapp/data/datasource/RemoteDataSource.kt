@@ -14,25 +14,14 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
         try {
             val response = apiService.getMovies()
             when {
-                response.isSuccessful -> flowOf(checkNotNull(response.body()?.results).map { it.toMovieDTO() })
+                response.isSuccessful ->
+                    flowOf(checkNotNull(
+                        response
+                            .body()?.results
+                    ).map { it.toMovieDTO() })
                 else -> flowOf(emptyList())
             }
         } catch (ex: Exception) {
             flowOf(emptyList())
         }
-
-//    suspend fun getMovieByName(searchMovieText: String): List<MovieDTO> {
-//        if (movieList.isEmpty() || searchMovieText.isEmpty()) {
-//            movieList = apiService.getMovies()
-//        } else if (searchMovieText.isNotEmpty()) {
-//            movieList = filterMovies(searchMovieText)
-//        }
-//        return movieList
-//    }
-//
-//    private fun filterMovies(searchMovieText: String): List<MovieDTO> {
-//        return movieList.filter {
-//            it.title!!.contains(searchMovieText, ignoreCase = true)
-//        }
-//    }
 }
