@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -18,14 +22,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.imdbapp.R
-import com.example.imdbapp.ui.components.EmailField
 import com.example.imdbapp.ui.components.Medium
 import com.example.imdbapp.ui.components.SignUp
 import com.example.imdbapp.ui.components.SocialNetwork
 import com.example.imdbapp.ui.components.button.ButtonLogin
+import com.example.imdbapp.ui.components.field.EmailField
 import com.example.imdbapp.ui.components.field.PasswordField
 import com.example.imdbapp.ui.components.text.Bold
 import com.example.imdbapp.ui.components.text.LightItalic
+import com.example.imdbapp.ui.components.text.Regular
 import com.example.imdbapp.viewmodel.LoginViewModel
 
 @Composable
@@ -34,9 +39,16 @@ fun LoginScreen(
     onNavigateSearch: () -> Unit,
     viewModel: LoginViewModel
 ) {
-    val email: String by viewModel.email.observeAsState(initial = "")
-    val password: String by viewModel.password.observeAsState(initial = "")
+    var emailState by rememberSaveable { mutableStateOf("") }
+    var passwordState by rememberSaveable { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
+
     val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
+
+    val icon = if (passwordVisibility)
+        painterResource(id = R.drawable.ic_visibility)
+    else
+        painterResource(id = R.drawable.ic_visibility_off)
 
     Box(
         modifier = Modifier
@@ -55,14 +67,49 @@ fun LoginScreen(
                 text = stringResource(id = R.string.usuario),
                 textUnit = 20.sp
             )
-            EmailField(email) { viewModel.onLoginChanged(it, password) }
+            EmailField(
+                email = emailState,
+                onTextFieldChanged = { emailState = it },
+                outline = colorResource(
+                    id = R.color.white
+                )
+            )
+            if (!viewModel.isUserName) {
+                Regular(
+                    modifier = Modifier,
+                    color = colorResource(R.color.light_gray_2),
+                    text = stringResource(
+                        id = R.string.required,
+                        stringResource(id = R.string.correo)
+                    ),
+                    textUnit = 10.sp
+                )
+            }
             Medium(
                 modifier = Modifier.padding(top = 15.dp, bottom = 8.dp),
                 color = colorResource(id = R.color.dark_text),
                 text = stringResource(id = R.string.contraseña),
                 textUnit = 20.sp
             )
-            PasswordField(password) { viewModel.onLoginChanged(email, it) }
+            PasswordField(
+                password = passwordState,
+                onTextFieldChanged = { passwordState = it },
+                onClick = { passwordVisibility = !passwordVisibility },
+                passVisibility = passwordVisibility,
+                painter = icon,
+                outline = colorResource(id = R.color.white)
+            )
+            if (!viewModel.isPassword) {
+                Regular(
+                    modifier = Modifier,
+                    color = colorResource(R.color.light_gray_2),
+                    text = stringResource(
+                        id = R.string.required,
+                        stringResource(id = R.string.contraseña)
+                    ),
+                    textUnit = 10.sp
+                )
+            }
             LightItalic(
                 modifier = Modifier
                     .padding(top = 8.dp)
@@ -71,7 +118,10 @@ fun LoginScreen(
                 text = stringResource(id = R.string.olvidar),
                 textUnit = 16.sp
             )
-            ButtonLogin({ onNavigateSearch() }, loginEnable)
+            ButtonLogin({
+                viewModel.signIn(emailState, passwordState)
+                onNavigateSearch()
+            }, loginEnable)
             LightItalic(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)

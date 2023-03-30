@@ -1,4 +1,4 @@
-package com.example.imdbapp.ui.components
+package com.example.imdbapp.ui.components.button
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,9 +13,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.imdbapp.R
+import com.example.imdbapp.ui.components.Medium
 
 @Composable
-fun ButtonSign(signUpEnable: Boolean, onLoginSelected: () -> Unit) {
+fun ButtonSign(
+    signUpEnable: Boolean,
+    onLoginSelected: () -> Unit
+) {
     Button(
         onClick = { onLoginSelected() },
         modifier = Modifier

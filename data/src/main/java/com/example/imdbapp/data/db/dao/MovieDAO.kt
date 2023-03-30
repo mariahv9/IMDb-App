@@ -1,7 +1,8 @@
-package com.example.imdbapp.data.db
+package com.example.imdbapp.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.example.imdbapp.data.db.entities.MovieEntity
 
 @Dao
 interface MovieDAO {

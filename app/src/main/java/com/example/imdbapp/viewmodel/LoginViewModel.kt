@@ -1,35 +1,46 @@
 package com.example.imdbapp.viewmodel
 
-import android.util.Patterns
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.imdbapp.domain.common.Resource
+import com.example.imdbapp.domain.usecase.GetLoginUseCase
+import com.example.imdbapp.state.UserState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : ViewModel() {
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String> = _email
-
-    private val _password = MutableLiveData<String>()
-    val password: LiveData<String> = _password
+class LoginViewModel @Inject constructor(
+    //private val getLoginUseCase: GetLoginUseCase,
+) : ViewModel() {
+    private val _loginState = MutableStateFlow(UserState())
+    var isUserName by mutableStateOf(true)
+    var isPassword by mutableStateOf(true)
 
     private val _loginEnable = MutableLiveData<Boolean>()
     val loginEnable: LiveData<Boolean> = _loginEnable
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    fun onLoginChanged(email: String, password: String) {
-        _email.value = email
-        _password.value = password
-        _loginEnable.value = isValidEmail(email) && isValidPassword(password)
+    fun signIn(email: String, password: String) {
+        isUserName = email.isNotEmpty()
+        isPassword = password.isNotEmpty() && password.length > 8
+        when {
+            isUserName && isPassword -> {
+                viewModelScope.launch {
+                    //getLoginUseCase.login(email, password)
+                    //getLginUseCase.isLogged().apply {
+                        Resource.Success {
+                            _loginState.update { it }
+                        //}
+                    }
+                }
+            }
+        }
     }
-
-    private fun isValidEmail(email: String): Boolean =
-        Patterns.EMAIL_ADDRESS.matcher(email).matches()
-
-    private fun isValidPassword(password: String): Boolean = password.length > 6
 }

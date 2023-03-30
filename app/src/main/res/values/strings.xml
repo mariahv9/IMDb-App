@@ -10,6 +10,7 @@
     <string name="registro">Regístrate</string>
     <string name="invitado">Continuar como invitado</string>
     <string name="login">Login</string>
+    <string name="required">%1$s es necesario</string>
 
     <!--    SignUp  -->
     <string name="sign_up_title">Crear una cuenta</string>

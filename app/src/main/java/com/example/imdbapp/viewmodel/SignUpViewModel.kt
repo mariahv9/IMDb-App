@@ -1,49 +1,66 @@
 package com.example.imdbapp.viewmodel
 
-import android.util.Patterns
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.imdbapp.domain.usecase.GetSignUpUseCase
+import com.example.imdbapp.mapper.toUserModel
+import com.example.imdbapp.state.UserState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor() : ViewModel() {
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String> = _email
-
-    private val _password = MutableLiveData<String>()
-    val password: LiveData<String> = _password
-
-    private val _name = MutableLiveData<String>()
-    val name: LiveData<String> = _name
-
+class SignUpViewModel @Inject constructor(
+    //private val getSignUpUseCase: GetSignUpUseCase
+) : ViewModel() {
+    var validatedPassword by mutableStateOf(true)
+    var isNamed by mutableStateOf(true)
+    var isEmail by mutableStateOf(true)
+    var isPassword by mutableStateOf(true)
+    private val _signUpState = MutableStateFlow(UserState())
     private val _signUpEnable = MutableLiveData<Boolean>()
     val signUpEnable: LiveData<Boolean> = _signUpEnable
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-
-    fun onLoginChanged(email: String, password: String) {
-        _email.value = email
-        _password.value = password
-        _signUpEnable.value = isValidEmail(email) && isValidPassword(password)
+    private fun isValidPassword(password: String): Boolean {
+        return if (password.isNotEmpty()) {
+            val uppercase = Regex("[A-Z]").containsMatchIn(password)
+            val lowercase = Regex("[a-z]").containsMatchIn(password)
+            val number = Regex("\\d").containsMatchIn(password)
+            val characters = Regex("[!@#\$%^&*(),.?\":{}|<>]").containsMatchIn(password)
+            val length = password.length > 8
+            uppercase && lowercase && number && characters && length
+        } else {
+            false
+        }
     }
 
-    fun onNameChanged(name: String) {
-        _name.value = name
-    }
+    fun signUp() {
+        isNamed = _signUpState.value.email.isNotEmpty()
+        isEmail = _signUpState.value.name.isNotEmpty()
+        isPassword = _signUpState.value.password.isNotEmpty()
 
-    private fun isValidEmail(email: String): Boolean =
-        Patterns.EMAIL_ADDRESS.matcher(email).matches()
-
-    fun isValidPassword(password: String): Boolean = password.length > 6
-
-    suspend fun onSignUpSelected() {
-        _isLoading.value = true
-        delay(400)
-        _isLoading.value = false
+        when {
+            isNamed && isEmail && isPassword -> {
+                validatedPassword = isValidPassword(_signUpState.value.password)
+                if (validatedPassword) {
+                    viewModelScope.launch {
+                        //getSignUpUseCase.register(
+                            _signUpState.value.copy(
+                                id = UUID.randomUUID().toString(),
+                                password = (_signUpState.value.email.plus(_signUpState.value.password)),
+                                isLogged = true
+                            ).toUserModel()
+                        //)
+                    }
+                }
+            }
+        }
     }
 }

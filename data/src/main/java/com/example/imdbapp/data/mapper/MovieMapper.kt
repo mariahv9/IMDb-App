@@ -1,8 +1,7 @@
 package com.example.imdbapp.data.mapper
 
-import com.example.imdbapp.data.db.MovieEntity
+import com.example.imdbapp.data.db.entities.MovieEntity
 import com.example.imdbapp.data.model.MovieDTO
-import com.example.imdbapp.data.reponse.MovieResponse
 import com.example.imdbapp.data.reponse.MovieResulResponse
 import com.example.imdbapp.domain.Constants.BASE_URL_MAGE
 import com.example.imdbapp.domain.model.MovieModel

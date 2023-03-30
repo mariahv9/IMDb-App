@@ -15,8 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.imdbapp.R
-import com.example.imdbapp.ui.components.*
+import com.example.imdbapp.ui.components.ButtonAccept
+import com.example.imdbapp.ui.components.Medium
 import com.example.imdbapp.ui.components.button.ButtonCancel
+import com.example.imdbapp.ui.components.field.EmailField
 import com.example.imdbapp.ui.components.text.Regular
 
 @Composable
@@ -57,7 +59,11 @@ fun Confirm(modifier: Modifier) {
             text = stringResource(id = R.string.correo),
             textUnit = 20.sp
         )
-        EmailField("email") { }
+        EmailField(
+            email = "email",
+            onTextFieldChanged = {},
+            outline = colorResource(id = R.color.light_gray_2)
+        )
         ButtonAccept { }
         ButtonCancel { }
     }

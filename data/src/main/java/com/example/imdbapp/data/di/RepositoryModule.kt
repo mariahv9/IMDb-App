@@ -1,6 +1,7 @@
 package com.example.imdbapp.data.di
 
-import com.example.imdbapp.data.datasource.RemoteDataSource
+import com.example.imdbapp.data.datasource.LocalDataSource
+import com.example.imdbapp.data.db.RoomDB
 import com.example.imdbapp.data.repository.MovieImdbRepositoryImpl
 import com.example.imdbapp.domain.repository.MovieImdbRepository
 import dagger.Module
@@ -12,6 +13,9 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
     @Provides
-    fun provideMovieRepository(remoteDataSource: RemoteDataSource): MovieImdbRepository =
-        MovieImdbRepositoryImpl(remoteDataSource)
+    fun provideMovieRepository(
+        localDataSource: LocalDataSource,
+        roomDB: RoomDB
+    ): MovieImdbRepository =
+        MovieImdbRepositoryImpl(localDataSource, roomDB)
 }

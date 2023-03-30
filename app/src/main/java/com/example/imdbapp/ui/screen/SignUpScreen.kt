@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -17,20 +21,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.imdbapp.R
 import com.example.imdbapp.ui.components.ArrowBack
-import com.example.imdbapp.ui.components.ButtonSign
-import com.example.imdbapp.ui.components.EmailSignUp
 import com.example.imdbapp.ui.components.Medium
 import com.example.imdbapp.ui.components.NameField
-import com.example.imdbapp.ui.components.PasswordSignUp
-import com.example.imdbapp.ui.components.text.LightItalic
+import com.example.imdbapp.ui.components.button.ButtonSign
+import com.example.imdbapp.ui.components.field.EmailField
+import com.example.imdbapp.ui.components.field.PasswordField
+import com.example.imdbapp.ui.components.text.Regular
 import com.example.imdbapp.viewmodel.SignUpViewModel
 
 @Composable
 fun SignUpScreen(onBack: () -> Unit, viewModel: SignUpViewModel) {
-    val email: String by viewModel.email.observeAsState(initial = "")
-    val password: String by viewModel.password.observeAsState(initial = "")
-    val name: String by viewModel.name.observeAsState(initial = "")
     val signEnable: Boolean by viewModel.signUpEnable.observeAsState(initial = false)
+
+    var nameState by rememberSaveable { mutableStateOf("") }
+    var emailState by rememberSaveable { mutableStateOf("") }
+    var passwordState by rememberSaveable { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
+
+    val icon = if (passwordVisibility)
+        painterResource(id = R.drawable.ic_visibility)
+    else
+        painterResource(id = R.drawable.ic_visibility_off)
 
     Box(
         modifier = Modifier
@@ -56,30 +67,57 @@ fun SignUpScreen(onBack: () -> Unit, viewModel: SignUpViewModel) {
                 text = stringResource(id = R.string.nombre),
                 textUnit = 20.sp
             )
-            NameField(name) { viewModel.onNameChanged(it) }
+            NameField(name = nameState, onTextFieldChanged = { nameState = it })
             Medium(
                 modifier = Modifier.padding(top = 20.dp, bottom = 8.dp),
                 color = colorResource(id = R.color.dark_text),
                 text = stringResource(id = R.string.correo),
                 textUnit = 20.sp
             )
-            EmailSignUp(email) { viewModel.onLoginChanged(it, password) }
+            EmailField(
+                email = emailState,
+                onTextFieldChanged = { emailState = it },
+                outline = colorResource(
+                    id = R.color.light_gray_2
+                )
+            )
+            if (!viewModel.isEmail) {
+                Regular(
+                    modifier = Modifier,
+                    color = colorResource(R.color.light_gray_2),
+                    text = stringResource(
+                        id = R.string.required,
+                        stringResource(id = R.string.correo)
+                    ),
+                    textUnit = 10.sp
+                )
+            }
             Medium(
                 modifier = Modifier.padding(top = 20.dp, bottom = 8.dp),
                 color = colorResource(id = R.color.dark_text),
                 text = stringResource(id = R.string.contraseña),
                 textUnit = 20.sp
             )
-            PasswordSignUp(password) { viewModel.onLoginChanged(email, it) }
-            if (!viewModel.isValidPassword(password)) {
-                LightItalic(
-                    modifier = Modifier.padding(top = 5.dp),
-                    color = colorResource(id = R.color.dark_text),
-                    text = stringResource(id = R.string.verificacion),
-                    textUnit = 15.sp
+            PasswordField(
+                password = passwordState,
+                onTextFieldChanged = { passwordState = it },
+                onClick = { passwordVisibility = !passwordVisibility },
+                passVisibility = passwordVisibility,
+                painter = icon,
+                outline = colorResource(id = R.color.light_gray_2)
+            )
+            if (!viewModel.isPassword) {
+                Regular(
+                    modifier = Modifier,
+                    color = colorResource(R.color.light_gray_2),
+                    text = stringResource(
+                        id = R.string.required,
+                        stringResource(id = R.string.contraseña)
+                    ),
+                    textUnit = 10.sp
                 )
             }
-            ButtonSign(signEnable) { }
+            ButtonSign(signUpEnable = signEnable, onLoginSelected = { viewModel.signUp() })
         }
     }
 }

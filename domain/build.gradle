@@ -34,6 +34,7 @@ android {
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "io.mockk:mockk:1.12.1"
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.44.2")
