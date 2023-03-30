@@ -6,7 +6,6 @@ import com.example.imdbapp.domain.model.MovieModel
 import com.example.imdbapp.domain.usecase.GetMovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,8 +21,9 @@ class MovieViewModel @Inject constructor(
 
     private fun getMoviesList() {
         viewModelScope.launch {
-            val result = getMovieUseCase()
-            _movieList.update { result }
+            getMovieUseCase.invoke().collect { result ->
+                _movieList.tryEmit(result)
+            }
         }
     }
 
