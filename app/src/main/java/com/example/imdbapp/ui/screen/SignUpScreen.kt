@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -30,9 +30,13 @@ import com.example.imdbapp.ui.components.text.Regular
 import com.example.imdbapp.viewmodel.SignUpViewModel
 
 @Composable
-fun SignUpScreen(onBack: () -> Unit, viewModel: SignUpViewModel) {
-    val signEnable: Boolean by viewModel.signUpEnable.observeAsState(initial = false)
+fun SignUpScreen(
+    onBack: () -> Unit,
+    onNavigateSearch: () -> Unit,
+    viewModel: SignUpViewModel
+) {
 
+    val registerState by viewModel.signUpState.collectAsState()
     var nameState by rememberSaveable { mutableStateOf("") }
     var emailState by rememberSaveable { mutableStateOf("") }
     var passwordState by rememberSaveable { mutableStateOf("") }
@@ -67,7 +71,10 @@ fun SignUpScreen(onBack: () -> Unit, viewModel: SignUpViewModel) {
                 text = stringResource(id = R.string.nombre),
                 textUnit = 20.sp
             )
-            NameField(name = nameState, onTextFieldChanged = { nameState = it })
+            NameField(name = nameState, onTextFieldChanged = {
+                nameState = it
+                registerState.apply { name = nameState }
+            })
             Medium(
                 modifier = Modifier.padding(top = 20.dp, bottom = 8.dp),
                 color = colorResource(id = R.color.dark_text),
@@ -76,7 +83,10 @@ fun SignUpScreen(onBack: () -> Unit, viewModel: SignUpViewModel) {
             )
             EmailField(
                 email = emailState,
-                onTextFieldChanged = { emailState = it },
+                onTextFieldChanged = {
+                    emailState = it
+                    registerState.apply { email = emailState }
+                },
                 outline = colorResource(
                     id = R.color.light_gray_2
                 )
@@ -100,7 +110,10 @@ fun SignUpScreen(onBack: () -> Unit, viewModel: SignUpViewModel) {
             )
             PasswordField(
                 password = passwordState,
-                onTextFieldChanged = { passwordState = it },
+                onTextFieldChanged = {
+                    passwordState = it
+                    registerState.apply { password = passwordState }
+                },
                 onClick = { passwordVisibility = !passwordVisibility },
                 passVisibility = passwordVisibility,
                 painter = icon,
@@ -117,7 +130,9 @@ fun SignUpScreen(onBack: () -> Unit, viewModel: SignUpViewModel) {
                     textUnit = 10.sp
                 )
             }
-            ButtonSign(signUpEnable = signEnable, onLoginSelected = { viewModel.signUp() })
+            ButtonSign(
+                signUpEnable = true,
+                onLoginSelected = { viewModel.signUp(onNavigateSearch) })
         }
     }
 }

@@ -1,8 +1,7 @@
 package com.example.imdbapp.data.di
 
 import android.content.Context
-import com.example.imdbapp.data.datasource.LoginDataSource
-import com.example.imdbapp.data.datasource.LoginDatasourceImpl
+import com.example.imdbapp.data.datasource.LoginDatasource
 import com.example.imdbapp.data.datasource.SignUpDataSource
 import com.example.imdbapp.data.datasource.SignUpDataSourceImpl
 import com.example.imdbapp.data.db.RoomDB
@@ -50,6 +49,6 @@ class DBModule {
 
     @Singleton
     @Provides
-    fun providerLoginDataSource(loginDAO: LoginDAO): LoginDataSource =
-        LoginDatasourceImpl(loginDAO)
+    fun providerLoginDataSource(loginDAO: LoginDAO): LoginDatasource =
+        LoginDatasource(loginDAO)
 }

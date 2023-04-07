@@ -1,4 +1,4 @@
-package com.example.imdbapp.data.mapper
+package com.example.imdbapp.domain.mapper
 
 import com.example.imdbapp.data.db.entities.UserEntity
 import com.example.imdbapp.domain.model.UserModel

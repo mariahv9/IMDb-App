@@ -26,6 +26,10 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onBack: () -> Unit)
     composable(route = SignUpDestination.route) {
         SignUpScreen(
             onBack = { onBack() },
+            onNavigateSearch = {
+                navController.popBackStack()
+                navController.navigate(SearchDestination.route)
+            },
             viewModel = hiltViewModel()
         )
     }

@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':domain')
+    implementation project(path: ':common')
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
 
     testImplementation 'junit:junit:4.13.2'

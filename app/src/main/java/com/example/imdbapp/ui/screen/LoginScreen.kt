@@ -43,7 +43,7 @@ fun LoginScreen(
     var passwordState by rememberSaveable { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
 
-    val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
+    val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = true)
 
     val icon = if (passwordVisibility)
         painterResource(id = R.drawable.ic_visibility)
@@ -118,10 +118,13 @@ fun LoginScreen(
                 text = stringResource(id = R.string.olvidar),
                 textUnit = 16.sp
             )
-            ButtonLogin({
-                viewModel.signIn(emailState, passwordState)
-                onNavigateSearch()
-            }, loginEnable)
+            ButtonLogin(onNavigate = {
+                viewModel.signIn(
+                    onNavigateSearch,
+                    emailState,
+                    passwordState
+                )
+            }, loginEnable = true)
             LightItalic(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)

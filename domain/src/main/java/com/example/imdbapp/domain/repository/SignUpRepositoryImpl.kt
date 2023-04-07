@@ -1,15 +1,14 @@
-package com.example.imdbapp.data.repository
+package com.example.imdbapp.domain.repository
 
 import com.example.imdbapp.data.datasource.SignUpDataSource
-import com.example.imdbapp.data.mapper.toUserEntity
-import com.example.imdbapp.domain.common.Resource
+import com.example.imdbapp.domain.mapper.toUserEntity
 import com.example.imdbapp.domain.model.UserModel
-import com.example.imdbapp.domain.repository.SignUpRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SignUpRepositoryImpl @Inject constructor(private val signUpDataSource: SignUpDataSource) :
     SignUpRepository {
-    override suspend fun register(userModel: UserModel): Resource<Boolean> {
+    override suspend fun register(userModel: UserModel): Flow<Boolean> {
         return signUpDataSource.validateRegister(userModel.toUserEntity())
     }
 }

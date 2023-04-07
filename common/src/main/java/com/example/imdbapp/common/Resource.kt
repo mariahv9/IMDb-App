@@ -1,4 +1,4 @@
-package com.example.imdbapp.domain.common
+package com.example.imdbapp.common
 
 sealed class Resource<out T> {
     class Loading<out T> : Resource<T>()

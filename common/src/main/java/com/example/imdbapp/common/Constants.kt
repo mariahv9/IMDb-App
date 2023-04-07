@@ -1,4 +1,4 @@
-package com.example.imdbapp.domain
+package com.example.imdbapp.common
 
 object Constants {
     const val DATABASE = "imdb"
