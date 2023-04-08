@@ -1,0 +1,18 @@
+package com.example.imdbapp.ui.screen
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.sp
+import com.example.imdbapp.R
+import com.example.imdbapp.ui.components.text.Bold
+
+@Composable
+fun HomeScreen() {
+    Bold(
+        modifier = Modifier,
+        color = colorResource(id = R.color.black),
+        text = "Home Screen",
+        textUnit = 20.sp
+    )
+}

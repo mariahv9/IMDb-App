@@ -17,11 +17,6 @@ object SignUpDestination : NavegationDestination {
     override val destination: String = "signUp_destination"
 }
 
-object SearchDestination : NavegationDestination {
-    override val route: String = "search_route"
-    override val destination: String = "search_destination"
-}
-
 fun NavGraphBuilder.loginGraph(navController: NavController, onBack: () -> Unit) {
     composable(route = SignUpDestination.route) {
         SignUpScreen(
@@ -38,3 +33,4 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onBack: () -> Unit)
         SearchScreen(movieViewModel = hiltViewModel())
     }
 }
+

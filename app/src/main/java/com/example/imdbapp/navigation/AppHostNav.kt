@@ -12,8 +12,11 @@ fun AppHostNav(
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
         splashGraph(navController)
+
         loginGraph(
             navController = navController
         ) { navController.popBackStack(LoginDestination.route, false) }
+
+        bottomGraph()
     }
 }

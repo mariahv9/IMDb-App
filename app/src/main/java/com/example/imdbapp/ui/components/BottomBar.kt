@@ -16,7 +16,9 @@ import com.example.imdbapp.R
 import com.example.imdbapp.ui.components.text.Regular
 
 @Composable
-fun BottomBar(modifier: Modifier) {
+fun BottomBar(
+    modifier: Modifier,
+) {
     val selectedIndex = remember { mutableStateOf(0) }
     BottomNavigation(
         elevation = 10.dp,

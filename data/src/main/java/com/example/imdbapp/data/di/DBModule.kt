@@ -3,7 +3,6 @@ package com.example.imdbapp.data.di
 import android.content.Context
 import com.example.imdbapp.data.datasource.LoginDatasource
 import com.example.imdbapp.data.datasource.SignUpDataSource
-import com.example.imdbapp.data.datasource.SignUpDataSourceImpl
 import com.example.imdbapp.data.db.RoomDB
 import com.example.imdbapp.data.db.dao.LoginDAO
 import com.example.imdbapp.data.db.dao.MovieDAO
@@ -45,7 +44,7 @@ class DBModule {
     @Singleton
     @Provides
     fun providerRegisterDataSource(signUpDAO: SignUpDAO): SignUpDataSource =
-        SignUpDataSourceImpl(signUpDAO)
+        SignUpDataSource(signUpDAO)
 
     @Singleton
     @Provides

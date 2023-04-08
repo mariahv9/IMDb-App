@@ -43,8 +43,6 @@ fun LoginScreen(
     var passwordState by rememberSaveable { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
 
-    val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = true)
-
     val icon = if (passwordVisibility)
         painterResource(id = R.drawable.ic_visibility)
     else
