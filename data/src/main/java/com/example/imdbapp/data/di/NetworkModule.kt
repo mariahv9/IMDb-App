@@ -1,5 +1,7 @@
 package com.example.imdbapp.data.di
 
+import com.example.imdbapp.common.Constants.API_KEY
+import com.example.imdbapp.common.Constants.BASE_URL
 import com.example.imdbapp.data.network.ApiService
 import dagger.Module
 import dagger.Provides
@@ -16,8 +18,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-    private val URL = "https://api.themoviedb.org/3/"
-    private val API_KEY = "c5c47722a4adcc77f6e84f28a48b857a"
 
     @Singleton
     @Provides
@@ -57,7 +57,7 @@ class NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(URL)
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .build()

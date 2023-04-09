@@ -19,6 +19,7 @@ fun CardListProfile(
 ) {
     Box(
         modifier = Modifier
+            .padding(start = 10.dp)
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .background(colorResource(id = R.color.white))

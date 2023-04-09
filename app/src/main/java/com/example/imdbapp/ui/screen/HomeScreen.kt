@@ -1,18 +1,18 @@
 package com.example.imdbapp.ui.screen
 
+import android.annotation.SuppressLint
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.sp
-import com.example.imdbapp.R
-import com.example.imdbapp.ui.components.text.Bold
+import androidx.navigation.NavController
+import com.example.imdbapp.ui.components.CustomBottomBar
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeScreen() {
-    Bold(
-        modifier = Modifier,
-        color = colorResource(id = R.color.black),
-        text = "Home Screen",
-        textUnit = 20.sp
-    )
+fun HomeScreen(navController: NavController) {
+    Scaffold(
+        bottomBar = { CustomBottomBar(navController) }
+    ) {
+        Text(text = "Home")
+    }
 }

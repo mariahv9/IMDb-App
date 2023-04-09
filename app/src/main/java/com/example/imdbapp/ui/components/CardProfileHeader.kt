@@ -8,9 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.example.imdbapp.R
+import com.example.imdbapp.viewmodel.LoginViewModel
 
 @Composable
-fun CardProfileHeader() {
+fun CardProfileHeader(loginViewModel: LoginViewModel) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -18,16 +19,16 @@ fun CardProfileHeader() {
             .padding(bottom = 10.dp)
             .background(colorResource(id = R.color.white))
     ) {
-        CardProfile(Modifier.align(Alignment.TopStart))
+        CardProfile(Modifier.align(Alignment.TopStart), loginViewModel)
     }
 }
 
 @Composable
-fun CardProfile(modifier: Modifier) {
-    HeaderProfile(modifier)
+fun CardProfile(modifier: Modifier, loginViewModel: LoginViewModel) {
+    HeaderProfile(modifier, loginViewModel)
     LineDivider(
-        modifier.padding(top = 70.dp, start = 35.dp, end = 35.dp),
-        colorResource(id = R.color.gray)
+        modifier.padding(top = 60.dp, start = 35.dp, end = 35.dp),
+        colorResource(id = R.color.black_op)
     )
     //add recyclerview
 }

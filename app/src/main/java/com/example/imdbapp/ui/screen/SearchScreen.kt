@@ -11,22 +11,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
-import com.example.imdbapp.ui.components.BottomBar
+import androidx.navigation.NavController
 import com.example.imdbapp.ui.components.CardRecyclerSearch
+import com.example.imdbapp.ui.components.CustomBottomBar
 import com.example.imdbapp.ui.components.field.SearchTextField
 import com.example.imdbapp.viewmodel.MovieViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SearchScreen(
+    navController: NavController,
     movieViewModel: MovieViewModel
 ) {
     val text = remember { mutableStateOf(TextFieldValue("")) }
 
     Scaffold(
-        bottomBar = { BottomBar(Modifier) }
+        bottomBar = { CustomBottomBar(navController) }
     ) {
-        Column() {
+        Column {
             SearchTextField(state = text)
             LazyColumn(
                 modifier = Modifier

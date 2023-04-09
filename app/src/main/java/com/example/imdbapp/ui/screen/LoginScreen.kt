@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -36,7 +35,7 @@ import com.example.imdbapp.viewmodel.LoginViewModel
 @Composable
 fun LoginScreen(
     onNavigateSignUp: () -> Unit,
-    onNavigateSearch: () -> Unit,
+    onNavigateHome: () -> Unit,
     viewModel: LoginViewModel
 ) {
     var emailState by rememberSaveable { mutableStateOf("") }
@@ -118,7 +117,7 @@ fun LoginScreen(
             )
             ButtonLogin(onNavigate = {
                 viewModel.signIn(
-                    onNavigateSearch,
+                    onNavigateHome,
                     emailState,
                     passwordState
                 )
@@ -138,7 +137,7 @@ fun LoginScreen(
             )
             Bold(modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .clickable { onNavigateSearch() }
+                .clickable { onNavigateHome() }
                 .padding(top = 25.dp),
                 color = colorResource(id = R.color.dark_text),
                 text = stringResource(id = R.string.invitado),

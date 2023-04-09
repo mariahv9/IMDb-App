@@ -25,9 +25,9 @@ fun NavGraphBuilder.splashGraph(navController: NavController) {
             viewModel = hiltViewModel(),
             onNavigateSignUp = {
                 navController.navigate(SignUpDestination.route)
-            }, onNavigateSearch = {
+            }, onNavigateHome = {
                 navController.popBackStack()
-                navController.navigate(SearchDestination.route)
+                navController.navigate(HomeDestination.route)
             })
     }
 }

@@ -17,6 +17,6 @@ fun AppHostNav(
             navController = navController
         ) { navController.popBackStack(LoginDestination.route, false) }
 
-        bottomGraph()
+        bottomGraph(navController)
     }
 }

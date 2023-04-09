@@ -1,20 +1,31 @@
 package com.example.imdbapp.ui.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.imdbapp.R
+import com.example.imdbapp.viewmodel.LoginViewModel
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun HeaderProfile(modifier: Modifier) {
+fun HeaderProfile(modifier: Modifier, loginViewModel: LoginViewModel) {
+
     ConstraintLayout(
         modifier = modifier
             .padding(top = 15.dp, start = 35.dp, end = 35.dp)
@@ -48,7 +59,7 @@ fun HeaderProfile(modifier: Modifier) {
                     end.linkTo(parent.end)
                 },
             color = colorResource(id = R.color.dark_text),
-            text = "Juan Perez",
+            text = loginViewModel.userState.value.name,
             textUnit = 20.sp
         )
 

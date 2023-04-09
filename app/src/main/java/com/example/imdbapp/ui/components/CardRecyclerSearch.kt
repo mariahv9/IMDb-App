@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.imdbapp.R
 import com.example.imdbapp.domain.model.MovieModel
-import com.example.imdbapp.toYear
+import com.example.imdbapp.common.toYear
 import com.example.imdbapp.ui.components.text.Regular
 
 @Composable

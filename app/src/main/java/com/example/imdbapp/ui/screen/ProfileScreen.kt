@@ -12,33 +12,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.imdbapp.R
 import com.example.imdbapp.ui.components.*
+import com.example.imdbapp.viewmodel.LoginViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(loginViewModel: LoginViewModel, navController: NavController) {
     Scaffold(
-        bottomBar = { BottomBar(Modifier) }
+        bottomBar = { CustomBottomBar(navController) }
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(colorResource(id = R.color.light_gray))
         ) {
-            ProfilePage(modifier = Modifier.align(Alignment.TopStart))
+            ProfilePage(modifier = Modifier.align(Alignment.TopStart), loginViewModel)
         }
     }
 }
 
 @Composable
-fun ProfilePage(modifier: Modifier) {
+fun ProfilePage(modifier: Modifier, loginViewModel: LoginViewModel) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        CardProfileHeader()
+        CardProfileHeader(loginViewModel)
 
         // Lista seguimiento
         CardSectionProfile(

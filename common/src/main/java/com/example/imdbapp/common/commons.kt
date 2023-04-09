@@ -1,4 +1,4 @@
-package com.example.imdbapp
+package com.example.imdbapp.common
 
 import android.annotation.SuppressLint
 import java.text.ParseException

@@ -4,7 +4,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.imdbapp.ui.screen.SearchScreen
+import com.example.imdbapp.ui.screen.HomeScreen
 import com.example.imdbapp.ui.screen.SignUpScreen
 
 object LoginDestination : NavegationDestination {
@@ -30,7 +30,6 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onBack: () -> Unit)
     }
 
     composable(route = SearchDestination.route) {
-        SearchScreen(movieViewModel = hiltViewModel())
+        HomeScreen(navController = navController)
     }
 }
-

@@ -1,10 +1,13 @@
 package com.example.imdbapp.navigation
 
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.imdbapp.ui.screen.HomeScreen
 import com.example.imdbapp.ui.screen.PlayScreen
 import com.example.imdbapp.ui.screen.ProfileScreen
+import com.example.imdbapp.ui.screen.SearchScreen
 
 object HomeDestination : NavegationDestination {
     override val route: String = "home_route"
@@ -26,16 +29,20 @@ object ProfileDestination : NavegationDestination {
     override val destination: String = "profile_destination"
 }
 
-fun NavGraphBuilder.bottomGraph() {
+fun NavGraphBuilder.bottomGraph(navController: NavController) {
     composable(route = HomeDestination.route) {
-        HomeScreen()
+        HomeScreen(navController)
+    }
+
+    composable(route = SearchDestination.route) {
+        SearchScreen(navController = navController, movieViewModel = hiltViewModel())
     }
 
     composable(route = PlayDestination.route) {
-        PlayScreen()
+        PlayScreen(navController)
     }
 
     composable(route = ProfileDestination.route) {
-        ProfileScreen()
+        ProfileScreen(navController = navController, loginViewModel = hiltViewModel())
     }
 }
