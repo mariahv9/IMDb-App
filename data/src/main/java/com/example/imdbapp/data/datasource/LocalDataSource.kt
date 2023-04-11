@@ -24,4 +24,19 @@ class LocalDataSource @Inject constructor(private val apiService: ApiService) {
         } catch (ex: Exception) {
             flowOf(emptyList())
         }
+
+    suspend fun getPopularMovieList(): Flow<List<MovieDTO>> =
+        try {
+            val response = apiService.getPopularMovies()
+            when {
+                response.isSuccessful ->
+                    flowOf(checkNotNull(
+                        response
+                            .body()?.results
+                    ).map { it.toMovieDTO() })
+                else -> flowOf(emptyList())
+            }
+        } catch (ex: Exception) {
+            flowOf(emptyList())
+        }
 }

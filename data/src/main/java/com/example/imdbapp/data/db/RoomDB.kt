@@ -14,9 +14,7 @@ import com.example.imdbapp.data.db.entities.UserEntity
 abstract class RoomDB : RoomDatabase() {
     abstract fun movieDao(): MovieDAO
     abstract fun loginDao(): LoginDAO
-
     abstract fun signUpDao(): SignUpDAO
-
 
     companion object {
         @Volatile

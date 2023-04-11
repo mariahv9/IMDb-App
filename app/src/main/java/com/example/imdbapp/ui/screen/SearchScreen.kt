@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -23,6 +25,7 @@ fun SearchScreen(
     navController: NavController,
     movieViewModel: MovieViewModel
 ) {
+    val movieState by movieViewModel.movieState.collectAsState()
     val text = remember { mutableStateOf(TextFieldValue("")) }
 
     Scaffold(
@@ -35,8 +38,10 @@ fun SearchScreen(
                     .fillMaxWidth(),
                 state = rememberLazyListState()
             ) {
-                itemsIndexed(movieViewModel.searchMovie(text.value.text)) { _, movie ->
-                    CardRecyclerSearch(movie = movie)
+                if (movieState.isNotEmpty()){
+                    itemsIndexed(movieViewModel.searchMovie(text.value.text)) { _, movie ->
+                        CardRecyclerSearch(movie = movie)
+                    }
                 }
             }
         }

@@ -31,7 +31,7 @@ object ProfileDestination : NavegationDestination {
 
 fun NavGraphBuilder.bottomGraph(navController: NavController) {
     composable(route = HomeDestination.route) {
-        HomeScreen(navController)
+        HomeScreen(navController, movieViewModel = hiltViewModel())
     }
 
     composable(route = SearchDestination.route) {

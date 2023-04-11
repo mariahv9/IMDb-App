@@ -43,7 +43,7 @@ fun CardSectionProfile(
 @Composable
 fun CardView(
     title: String,
-    description: String,
+    description: String = "",
     modifier: Modifier,
     boolean: Boolean,
     button: String = ""

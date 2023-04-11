@@ -14,4 +14,9 @@ class MovieImdbRepositoryImpl @Inject constructor(
         return localDataSource
             .getMovieList().map { it.listMovieDTOTtoMovieModel() }
     }
+
+    override suspend fun getPopularMovieList(): Flow<List<MovieModel>> {
+        return localDataSource
+            .getPopularMovieList().map { it.listMovieDTOTtoMovieModel() }
+    }
 }

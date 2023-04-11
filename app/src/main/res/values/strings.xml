@@ -43,6 +43,15 @@
     <string name="estaciones">Estaciones</string>
     <string name="notificaciones">Notificaciones</string>
     <string name="mejorar">Mejorar selecciones principales</string>
+    <string name="titulo_1">Calificar y obtener recomendaciones</string>
+    <string name="titulo_2">Agregar a listas</string>
+    <string name="titulo_3">Aún no hay críticas</string>
+    <string name="subtitulo_1">Calificaciones</string>
+    <string name="subtitulo_2">Listas</string>
+    <string name="subtitulo_3">Comentarios</string>
+    <string name="numero_1">0</string>
+    <string name="numero_2">0</string>
+    <string name="numero_3">0</string>
 
     <!--    BottomNav   -->
     <string name="inicio">Inicio</string>
@@ -51,5 +60,8 @@
 
     <!--    Search  -->
     <string name="search">Buscar IMDb</string>
+
+    <!--    Homne  -->
+    <string name="popular">Las mejores selecciones</string>
 
 </resources>

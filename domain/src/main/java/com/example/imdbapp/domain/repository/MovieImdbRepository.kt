@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieImdbRepository {
     suspend fun getMovieList(): Flow<List<MovieModel>>
+    suspend fun getPopularMovieList(): Flow<List<MovieModel>>
 }

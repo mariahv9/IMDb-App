@@ -30,6 +30,6 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onBack: () -> Unit)
     }
 
     composable(route = SearchDestination.route) {
-        HomeScreen(navController = navController)
+        HomeScreen(navController = navController, movieViewModel = hiltViewModel())
     }
 }

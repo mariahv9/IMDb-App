@@ -1,7 +1,13 @@
 package com.example.imdbapp.ui.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,12 +29,14 @@ fun CardProfileHeader(loginViewModel: LoginViewModel) {
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CardProfile(modifier: Modifier, loginViewModel: LoginViewModel) {
-    HeaderProfile(modifier, loginViewModel)
-    LineDivider(
-        modifier.padding(top = 60.dp, start = 35.dp, end = 35.dp),
-        colorResource(id = R.color.black_op)
-    )
-    //add recyclerview
+    Column {
+        HeaderProfile(modifier, loginViewModel)
+        LineDivider(
+            modifier.padding(top = 60.dp, start = 35.dp, end = 35.dp),
+            colorResource(id = R.color.black_op)
+        )
+    }
 }
