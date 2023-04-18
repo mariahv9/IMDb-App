@@ -43,6 +43,9 @@ fun NavGraphBuilder.bottomGraph(navController: NavController) {
     }
 
     composable(route = ProfileDestination.route) {
-        ProfileScreen(navController = navController, loginViewModel = hiltViewModel())
+        ProfileScreen(
+            navController = navController,
+            loginViewModel = hiltViewModel()
+        )
     }
 }

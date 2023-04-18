@@ -1,7 +1,6 @@
 package com.example.imdbapp.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -33,23 +32,17 @@ fun CardRecyclerMovie(
             .height(270.dp)
             .shadow(10.dp, RectangleShape, ambientColor = colorResource(id = R.color.dark_gray))
     ) {
-        Column(
-            modifier = Modifier.padding(
-                top = 15.dp,
-                bottom = 15.dp,
-                start = 10.dp,
-                end = 10.dp
-            )
-        ) {
+        Column {
             Image(
-                modifier = Modifier.size(160.dp),
+                modifier = Modifier
+                    .height(100.dp)
+                    .width(100.dp),
                 painter = rememberAsyncImagePainter(movie.poster_path),
                 contentDescription = "Card image"
             )
-            Row(Modifier.padding(top = 5.dp)) {
+            Row(Modifier.padding(top = 5.dp, start = 10.dp)) {
                 Image(
-                    modifier = Modifier
-                        .size(15.dp),
+                    modifier = Modifier.size(15.dp),
                     painter = painterResource(id = R.drawable.icon_star),
                     contentDescription = "star"
                 )
@@ -61,7 +54,7 @@ fun CardRecyclerMovie(
                 )
             }
             Regular(
-                modifier = Modifier.padding(top = 10.dp),
+                modifier = Modifier.padding(top = 10.dp, start = 10.dp),
                 color = colorResource(id = R.color.black),
                 text = movie.title,
                 textUnit = 15.sp

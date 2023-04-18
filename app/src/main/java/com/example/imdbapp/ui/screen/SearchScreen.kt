@@ -1,6 +1,7 @@
 package com.example.imdbapp.ui.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -12,8 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.navigation.NavController
+import com.example.imdbapp.R
 import com.example.imdbapp.ui.components.CardRecyclerSearch
 import com.example.imdbapp.ui.components.CustomBottomBar
 import com.example.imdbapp.ui.components.field.SearchTextField
@@ -35,10 +38,11 @@ fun SearchScreen(
             SearchTextField(state = text)
             LazyColumn(
                 modifier = Modifier
+                    .background(colorResource(id = R.color.light_gray))
                     .fillMaxWidth(),
                 state = rememberLazyListState()
             ) {
-                if (movieState.isNotEmpty()){
+                if (movieState.isNotEmpty()) {
                     itemsIndexed(movieViewModel.searchMovie(text.value.text)) { _, movie ->
                         CardRecyclerSearch(movie = movie)
                     }

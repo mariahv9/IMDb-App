@@ -49,9 +49,6 @@
     <string name="subtitulo_1">Calificaciones</string>
     <string name="subtitulo_2">Listas</string>
     <string name="subtitulo_3">Comentarios</string>
-    <string name="numero_1">0</string>
-    <string name="numero_2">0</string>
-    <string name="numero_3">0</string>
 
     <!--    BottomNav   -->
     <string name="inicio">Inicio</string>
