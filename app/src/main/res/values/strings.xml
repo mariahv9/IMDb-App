@@ -58,7 +58,8 @@
     <!--    Search  -->
     <string name="search">Buscar IMDb</string>
 
-    <!--    Homne  -->
+    <!--    Home  -->
     <string name="popular">Las mejores selecciones</string>
+    <string name="favoritos">Favoritos de los aficionados</string>
 
 </resources>
