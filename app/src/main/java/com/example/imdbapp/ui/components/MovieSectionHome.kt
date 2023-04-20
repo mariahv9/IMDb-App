@@ -20,13 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.imdbapp.R
 import com.example.imdbapp.domain.model.MovieModel
+import com.example.imdbapp.state.MovieState
 import com.example.imdbapp.ui.components.text.Bold
 import com.example.imdbapp.viewmodel.MovieViewModel
 
 @Composable
 fun MovieSectionHome(
     title: String,
-    list: List<MovieModel>
+    list: List<MovieState>
 ) {
     Box(
         modifier = Modifier

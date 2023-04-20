@@ -22,7 +22,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.imdbapp.R
-import com.example.imdbapp.domain.model.MovieModel
 import com.example.imdbapp.ui.components.CustomBottomBar
 import com.example.imdbapp.ui.components.MovieSectionHome
 import com.example.imdbapp.ui.components.text.Bold
@@ -39,7 +38,7 @@ fun HomeScreen(
         bottomBar = { CustomBottomBar(navController) }
     ) {
         val moviePopularState by movieViewModel.popularMovieState.collectAsState()
-        //val topMovie = topRatedMovie(moviePopularState)
+
         Box {
             Column(
                 modifier = Modifier
@@ -66,7 +65,7 @@ fun HomeScreen(
                                     .height(250.dp)
                                     .fillMaxWidth(),
                                 contentScale = ContentScale.Crop,
-                                painter = rememberAsyncImagePainter("https://image.tmdb.org/t/p/w500/kuf6dutpsT0vSVehic3EZIqkOBt.jpg"),
+                                painter = rememberAsyncImagePainter(movieViewModel.topMovie.backdrop_path),
                                 contentDescription = "Movie image"
                             )
                         }
@@ -87,7 +86,7 @@ fun HomeScreen(
                                     top.linkTo(frontImage.bottom)
                                 },
                             color = colorResource(id = R.color.black),
-                            text = "Puss in Boots",
+                            text = movieViewModel.topMovie.title,
                             textUnit = 20.sp
                         )
                         Regular(
@@ -107,7 +106,7 @@ fun HomeScreen(
                                 .constrainAs(imagePoster) {
                                     top.linkTo(play.top)
                                 },
-                            painter = rememberAsyncImagePainter("https://image.tmdb.org/t/p/w500/kuf6dutpsT0vSVehic3EZIqkOBt.jpg"),
+                            painter = rememberAsyncImagePainter(movieViewModel.topMovie.poster_path),
                             contentDescription = "Poster image"
                         )
                     }
@@ -121,7 +120,7 @@ fun HomeScreen(
                 ) {
                     MovieSectionHome(
                         title = stringResource(id = R.string.popular),
-                        list = bestSelections(moviePopularState)
+                        list = moviePopularState
                     )
                 }
 
@@ -133,7 +132,7 @@ fun HomeScreen(
                 ) {
                     MovieSectionHome(
                         title = stringResource(id = R.string.favoritos),
-                        list = topRatedMovie(bestSelections(moviePopularState))
+                        list = movieViewModel.popularMovies
                     )
                 }
                 Spacer(modifier = Modifier.padding(top = 30.dp))
@@ -141,9 +140,3 @@ fun HomeScreen(
         }
     }
 }
-
-fun topRatedMovie(list: List<MovieModel>): List<MovieModel> =
-    list.sortedBy { it.vote_average }.asReversed()
-
-fun bestSelections(list: List<MovieModel>): List<MovieModel> =
-    list.filter { it.vote_average != topRatedMovie(list)[0].vote_average }

@@ -19,11 +19,12 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.imdbapp.R
 import com.example.imdbapp.common.toYear
 import com.example.imdbapp.domain.model.MovieModel
+import com.example.imdbapp.state.MovieState
 import com.example.imdbapp.ui.components.text.Regular
 
 @Composable
 fun CardRecyclerSearch(
-    movie: MovieModel
+    movie: MovieState
 ) {
     LineDivider(
         modifier = Modifier.padding(start = 15.dp, end = 15.dp),

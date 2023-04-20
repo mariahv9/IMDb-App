@@ -21,11 +21,12 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.imdbapp.R
 import com.example.imdbapp.domain.model.MovieModel
+import com.example.imdbapp.state.MovieState
 import com.example.imdbapp.ui.components.text.Regular
 
 @Composable
 fun CardRecyclerMovie(
-    movie: MovieModel
+    movie: MovieState
 ) {
     Card(
         modifier = Modifier
